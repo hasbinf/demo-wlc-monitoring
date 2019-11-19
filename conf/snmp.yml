@@ -535,6 +535,7 @@ wlc_monitoring:
   - 1.3.6.1.4.1.9.9.513.1.2.2.1.14 # cLApEthernetIfTxTotalBytes (Tx at Upstream Port)
   - 1.3.6.1.4.1.9.9.513.1.1.1.1.72 # cLApActiveClientCount
   - 1.3.6.1.4.1.14179.2.2.1.1.17 # bsnAPSerialNumber
+  - 1.3.6.1.4.1.9.9.513.1.1.1.1.5 # cLApName
   - 1.3.6.1.4.1.14179.2.2.1.1.19 # bsnApIpAddress (uptream IP Address)
   metrics:
   - name: cLApEthernetIfRxTotalBytes
@@ -641,6 +642,16 @@ wlc_monitoring:
       - indexAP5
       labelname: bsnAPSerialNumber
       oid: 1.3.6.1.4.1.14179.2.2.1.1.17 
+      type: DisplayString
+    - labels:
+      - indexAP0
+      - indexAP1
+      - indexAP2
+      - indexAP3
+      - indexAP4
+      - indexAP5
+      labelname: cLApName
+      oid: 1.3.6.1.4.1.9.9.513.1.1.1.1.5 
       type: DisplayString
     - labels:
       - indexAP0
