@@ -1,0 +1,68 @@
+version: "2.1"
+
+networks:
+  olt-monitoring:
+    external: true
+
+volumes:
+    grafana_data: {}
+
+services:
+
+  snmp-exporter:
+    image: prom/snmp-exporter
+    networks:
+      olt-monitoring:
+        aliases:
+          - snmp-exporter
+    ports:
+      - "9116:9116"
+    volumes: 
+      - ${PWD}/conf/snmp.yml:/etc/snmp_exporter/snmp.yml
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+  prometheus:
+    image: prom/prometheus
+    networks:
+      olt-monitoring:
+        aliases:
+          - prometheus
+    ports:
+      - "9090:9090"
+    volumes: 
+      - ${PWD}/conf/prometheus.yml:/etc/prometheus/prometheus.yml
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+  grafana:
+    image: grafana/grafana
+    user: root
+    networks:
+      olt-monitoring:
+        aliases:
+          - grafana
+    depends_on:
+      - prometheus
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ${PWD}/img/logo-finiks.svg:/usr/share/grafana/public/img/grafana_icon.svg
+      - ${PWD}/img/logo_icon.png:/usr/share/grafana/public/img/fav32.png
+      - ${PWD}/img/logo_icon.png:/usr/share/grafana/public/img/apple-touch-icon.png
+      - ${PWD}/conf/grafana-entrypoint.sh:/entrypoint.sh
+    environment:
+      - "GF_SECURITY_ADMIN_PASSWORD=pass"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+    entrypoint: "/entrypoint.sh"
