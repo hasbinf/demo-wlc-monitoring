@@ -664,6 +664,388 @@ wlc_monitoring:
       oid: 1.3.6.1.4.1.14179.2.2.1.1.19 
       type: InetAddressIPv4
 
-  version: 1
+  version: 2
+  auth:
+    community: "public"
+
+wlc_monitoring-2:
+  walk:
+  - 1.3.6.1.4.1.14179.2.2.1.1.17 # bsnAPSerialNumber
+  - 1.3.6.1.4.1.9.9.513.1.1.1.1.5 # cLApName
+  - 1.3.6.1.4.1.9.9.513.1.9.1.1.6 # cLApWlanStatsAssocClientNum
+  - 1.3.6.1.4.1.9.9.513.1.10.2.1.1 # cLApRadioWlanSsid
+  metrics:
+  - name: cLApWlanStatsAssocClientNum
+    oid: 1.3.6.1.4.1.9.9.513.1.9.1.1.6 # cLApWlanStatsAssocClientNum
+    type: gauge
+    indexes:
+    - labelname: indexAP0
+      type: gauge
+    - labelname: indexAP1
+      type: gauge
+    - labelname: indexAP2
+      type: gauge
+    - labelname: indexAP3
+      type: gauge
+    - labelname: indexAP4
+      type: gauge
+    - labelname: indexAP5
+      type: gauge
+    - labelname: indexAP6
+      type: gauge
+    - labelname: indexAP7
+      type: gauge
+    lookups:
+    - labels:
+      - indexAP0
+      - indexAP1
+      - indexAP2
+      - indexAP3
+      - indexAP4
+      - indexAP5
+      labelname: bsnAPSerialNumber
+      oid: 1.3.6.1.4.1.14179.2.2.1.1.17 
+      type: DisplayString
+    - labels:
+      - indexAP0
+      - indexAP1
+      - indexAP2
+      - indexAP3
+      - indexAP4
+      - indexAP5
+      labelname: cLApName
+      oid: 1.3.6.1.4.1.9.9.513.1.1.1.1.5 
+      type: DisplayString
+    - labels:
+      - indexAP0
+      - indexAP1
+      - indexAP2
+      - indexAP3
+      - indexAP4
+      - indexAP5
+      - indexAP6
+      - indexAP7
+      labelname: cLApRadioWlanSsid
+      oid: 1.3.6.1.4.1.9.9.513.1.10.2.1.1 
+      type: DisplayString
+  version: 2
+  auth:
+    community: "public"
+
+wlc_client-monitoring:
+  walk:
+  - 1.3.6.1.4.1.14179.2.1.4.1.9 # bsnMobileStationStatus
+  - 1.3.6.1.4.1.14179.2.1.4.1.1 # bsnMobileStationMacAddress
+  - 1.3.6.1.4.1.9.9.599.1.3.1.1.3 # cldcClientWlanProfileName
+  metrics:
+  - name: bsnMobileStationStatus
+    oid: 1.3.6.1.4.1.14179.2.1.4.1.9 # bsnMobileStationStatus
+    type: gauge
+    indexes:
+    - labelname: indexClient0
+      type: gauge
+    - labelname: indexClient1
+      type: gauge
+    - labelname: indexClient2
+      type: gauge
+    - labelname: indexClient3
+      type: gauge
+    - labelname: indexClient4
+      type: gauge
+    - labelname: indexClient5
+      type: gauge
+    lookups:
+    - labels:
+      - indexClient0
+      - indexClient1
+      - indexClient2
+      - indexClient3
+      - indexClient4
+      - indexClient5
+      labelname: bsnMobileStationMacAddress
+      oid: 1.3.6.1.4.1.14179.2.1.4.1.1
+      type: PhysAddress48
+    - labels:
+      - indexClient0
+      - indexClient1
+      - indexClient2
+      - indexClient3
+      - indexClient4
+      - indexClient5
+      labelname: cldcClientWlanProfileName
+      oid: 1.3.6.1.4.1.9.9.599.1.3.1.1.3 
+      type: DisplayString
+  - name: bsnMobileStationRSSI
+    oid: 1.3.6.1.4.1.14179.2.1.6.1.1 # bsnMobileStationRSSI
+    type: gauge
+    indexes:
+    - labelname: indexClient0
+      type: gauge
+    - labelname: indexClient1
+      type: gauge
+    - labelname: indexClient2
+      type: gauge
+    - labelname: indexClient3
+      type: gauge
+    - labelname: indexClient4
+      type: gauge
+    - labelname: indexClient5
+      type: gauge
+    lookups:
+    - labels:
+      - indexClient0
+      - indexClient1
+      - indexClient2
+      - indexClient3
+      - indexClient4
+      - indexClient5
+      labelname: bsnMobileStationMacAddress
+      oid: 1.3.6.1.4.1.14179.2.1.4.1.1
+      type: PhysAddress48
+    - labels:
+      - indexClient0
+      - indexClient1
+      - indexClient2
+      - indexClient3
+      - indexClient4
+      - indexClient5
+      labelname: cldcClientWlanProfileName
+      oid: 1.3.6.1.4.1.9.9.599.1.3.1.1.3 
+      type: DisplayString
+  - name: bsnMobileStationSnr
+    oid: 1.3.6.1.4.1.14179.2.1.6.1.26 # bsnMobileStationSnr
+    type: gauge
+    indexes:
+    - labelname: indexClient0
+      type: gauge
+    - labelname: indexClient1
+      type: gauge
+    - labelname: indexClient2
+      type: gauge
+    - labelname: indexClient3
+      type: gauge
+    - labelname: indexClient4
+      type: gauge
+    - labelname: indexClient5
+      type: gauge
+    lookups:
+    - labels:
+      - indexClient0
+      - indexClient1
+      - indexClient2
+      - indexClient3
+      - indexClient4
+      - indexClient5
+      labelname: bsnMobileStationMacAddress
+      oid: 1.3.6.1.4.1.14179.2.1.4.1.1
+      type: PhysAddress48
+    - labels:
+      - indexClient0
+      - indexClient1
+      - indexClient2
+      - indexClient3
+      - indexClient4
+      - indexClient5
+      labelname: cldcClientWlanProfileName
+      oid: 1.3.6.1.4.1.9.9.599.1.3.1.1.3 
+      type: DisplayString
+  version: 2
+  auth:
+    community: "public"
+
+wlc_monitoring-uptime:
+  walk:
+  - 1.3.6.1.4.1.9.9.513.1.1.1.1.6 # cLApUpTime
+  - 1.3.6.1.4.1.14179.2.2.1.1.17 # bsnAPSerialNumber
+  - 1.3.6.1.4.1.14179.2.2.1.1.16 # bsnAPModel
+  - 1.3.6.1.4.1.9.9.513.1.2.3.1.1 # cLApDot11RadioMACAddress
+  metrics:
+  - name: cLApUpTime
+    oid: 1.3.6.1.4.1.9.9.513.1.1.1.1.6
+    type: gauge
+    indexes:
+    - labelname: indexAP0
+      type: gauge
+    - labelname: indexAP1
+      type: gauge
+    - labelname: indexAP2
+      type: gauge
+    - labelname: indexAP3
+      type: gauge
+    - labelname: indexAP4
+      type: gauge
+    - labelname: indexAP5
+      type: gauge
+    - labelname: indexIf
+      type: gauge
+    lookups:
+    - labels:
+      - indexAP0
+      - indexAP1
+      - indexAP2
+      - indexAP3
+      - indexAP4
+      - indexAP5
+      labelname: bsnAPSerialNumber
+      oid: 1.3.6.1.4.1.14179.2.2.1.1.17 
+      type: DisplayString
+    - labels:
+      - indexAP0
+      - indexAP1
+      - indexAP2
+      - indexAP3
+      - indexAP4
+      - indexAP5
+      labelname: bsnAPModel
+      oid: 1.3.6.1.4.1.14179.2.2.1.1.16
+      type: DisplayString
+    - labels:
+      - indexAP0
+      - indexAP1
+      - indexAP2
+      - indexAP3
+      - indexAP4
+      - indexAP5
+      - indexIf
+      labelname: cLApDot11RadioMACAddress
+      oid: 1.3.6.1.4.1.9.9.513.1.2.3.1.1
+      type: PhysAddress48
+
+
+  version: 2
+  auth:
+    community: "public"
+    
+wlc_ms_ssid:
+  walk:
+  - 1.3.6.1.4.1.14179.2.1.4.1.1 # bsnMobileStationMacAddress
+  - 1.3.6.1.4.1.14179.2.1.4.1.4 # bsnMobileStationAPMacAddr
+  - 1.3.6.1.4.1.14179.2.1.4.1.7 # bsnMobileStationSsid
+  metrics:
+  - name: bsnMobileStationMacAddress
+    oid: 1.3.6.1.4.1.14179.2.1.4.1.1
+    type: PhysAddress48
+    indexes:
+    - labelname: indexMS0
+      type: gauge
+    - labelname: indexMS1
+      type: gauge
+    - labelname: indexMS2
+      type: gauge
+    - labelname: indexMS3
+      type: gauge
+    - labelname: indexMS4
+      type: gauge
+    - labelname: indexMS5
+      type: gauge
+    lookups:
+    - labels:
+      - indexMS0
+      - indexMS1
+      - indexMS2
+      - indexMS3
+      - indexMS4
+      - indexMS5
+      labelname: bsnMobileStationAPMacAddr
+      oid: 1.3.6.1.4.1.14179.2.1.4.1.4
+      type: PhysAddress48
+    - labels:
+      - indexMS0
+      - indexMS1
+      - indexMS2
+      - indexMS3
+      - indexMS4
+      - indexMS5
+      labelname: bsnMobileStationSsid
+      oid: 1.3.6.1.4.1.14179.2.1.4.1.7
+      type: DisplayString
+
+  version: 2
+  auth:
+    community: "public"
+
+wlc_ms_stats:
+  walk:
+  - 1.3.6.1.4.1.14179.2.1.4.1.1 # bsnMobileStationMacAddress
+  - 1.3.6.1.4.1.14179.2.1.6.1.1 # bsnMobileStationRSSI
+  - 1.3.6.1.4.1.14179.2.1.6.1.26 # bsnMobileStationSnr
+  - 1.3.6.1.4.1.14179.2.1.4.1.4 # bsnMobileStationAPMacAddr
+  metrics:
+  - name: bsnMobileStationRSSI
+    oid: 1.3.6.1.4.1.14179.2.1.6.1.1
+    type: gauge
+    indexes:
+    - labelname: indexMS0
+      type: gauge
+    - labelname: indexMS1
+      type: gauge
+    - labelname: indexMS2
+      type: gauge
+    - labelname: indexMS3
+      type: gauge
+    - labelname: indexMS4
+      type: gauge
+    - labelname: indexMS5
+      type: gauge
+    lookups:
+    - labels:
+      - indexMS0
+      - indexMS1
+      - indexMS2
+      - indexMS3
+      - indexMS4
+      - indexMS5
+      labelname: bsnMobileStationMacAddress
+      oid: 1.3.6.1.4.1.14179.2.1.4.1.1
+      type: PhysAddress48
+    - labels:
+      - indexMS0
+      - indexMS1
+      - indexMS2
+      - indexMS3
+      - indexMS4
+      - indexMS5
+      labelname: bsnMobileStationAPMacAddr
+      oid: 1.3.6.1.4.1.14179.2.1.4.1.4
+      type: PhysAddress48
+  - name: bsnMobileStationSnr
+    oid: 1.3.6.1.4.1.14179.2.1.6.1.26
+    type: gauge
+    indexes:
+    - labelname: indexMS0
+      type: gauge
+    - labelname: indexMS1
+      type: gauge
+    - labelname: indexMS2
+      type: gauge
+    - labelname: indexMS3
+      type: gauge
+    - labelname: indexMS4
+      type: gauge
+    - labelname: indexMS5
+      type: gauge
+    lookups:
+    - labels:
+      - indexMS0
+      - indexMS1
+      - indexMS2
+      - indexMS3
+      - indexMS4
+      - indexMS5
+      labelname: bsnMobileStationMacAddress
+      oid: 1.3.6.1.4.1.14179.2.1.4.1.1
+      type: PhysAddress48
+    - labels:
+      - indexMS0
+      - indexMS1
+      - indexMS2
+      - indexMS3
+      - indexMS4
+      - indexMS5
+      labelname: bsnMobileStationAPMacAddr
+      oid: 1.3.6.1.4.1.14179.2.1.4.1.4
+      type: PhysAddress48
+
+  version: 2
   auth:
     community: "public"

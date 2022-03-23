@@ -35,6 +35,12 @@ services:
       - "9090:9090"
     volumes: 
       - ${PWD}/conf/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.console.libraries=/usr/share/prometheus/console_libraries"
+      - "--web.console.templates=/usr/share/prometheus/consoles"
+      - "--storage.tsdb.retention.time=2y"
     logging:
       driver: "json-file"
       options:
@@ -42,7 +48,8 @@ services:
         max-file: "5"
 
   grafana:
-    image: grafana/grafana
+          #image: grafana/grafana
+    image: ketitik/grafana:dev
     user: root
     networks:
       olt-monitoring:
@@ -54,15 +61,18 @@ services:
       - 3000:3000
     volumes:
       - grafana_data:/var/lib/grafana
-      - ${PWD}/img/logo-finiks.svg:/usr/share/grafana/public/img/grafana_icon.svg
-      - ${PWD}/img/logo_icon.png:/usr/share/grafana/public/img/fav32.png
-      - ${PWD}/img/logo_icon.png:/usr/share/grafana/public/img/apple-touch-icon.png
-      - ${PWD}/conf/grafana-entrypoint.sh:/entrypoint.sh
+      - ${PWD}/grafana.ini:/etc/grafana/grafana.ini
+        #- ${PWD}/img/logo-finiks.svg:/usr/share/grafana/public/img/grafana_icon.svg
+        #- ${PWD}/img/logo_icon.png:/usr/share/grafana/public/img/fav32.png
+        #- ${PWD}/img/logo_icon.png:/usr/share/grafana/public/img/apple-touch-icon.png
+        #- ${PWD}/conf/grafana-entrypoint.sh:/entrypoint.sh
     environment:
       - "GF_SECURITY_ADMIN_PASSWORD=pass"
+        #- "GF_SECURITY_ALLOW_EMBEDDING=true"
+        #- "GF_SECURITY_COOKIE_SAMESITE=none"
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
         max-file: "5"
-    entrypoint: "/entrypoint.sh"
+        #entrypoint: "/entrypoint.sh"
